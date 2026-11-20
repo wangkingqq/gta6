@@ -16,7 +16,7 @@ html[lang=zh] .en,html[lang=en] .zh{display:none}
 nav{display:flex;justify-content:space-between;align-items:center;padding-top:28px}
 .logo{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;letter-spacing:4px;font-size:24px}
 .lang{background:rgba(11,15,26,.55);color:var(--text);border:1px solid #4A5578;border-radius:999px;padding:8px 16px;font:inherit;font-size:13px;cursor:pointer}
-.hero-body{margin-top:auto;padding:300px 0 56px}
+.hero-body{margin-top:auto;padding:300px 24px 56px}
 .kicker{color:var(--gold);letter-spacing:3px;font-size:13px;font-weight:600}
 h1{font-family:'Space Grotesk','Noto Sans SC',sans-serif;font-size:clamp(40px,8vw,84px);line-height:1.05;margin:14px 0;text-shadow:0 2px 28px rgba(0,0,0,.65)}
 h1 em{font-style:normal;color:var(--gold)}
@@ -47,6 +47,29 @@ footer{margin-top:64px;border-top:1px solid var(--line);padding:28px 0 40px;colo
 #music.off{color:var(--mute)}
 #music.off .waves{display:none}
 #music.off .slash{display:block}
+h1 em{text-shadow:0 0 22px rgba(245,184,46,.6),0 2px 28px rgba(0,0,0,.65)}
+.btn{box-shadow:0 0 20px rgba(245,184,46,.5);animation:glow 2.4s ease-in-out infinite;transition:transform .2s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+@keyframes glow{0%,100%{box-shadow:0 0 18px rgba(245,184,46,.45)}50%{box-shadow:0 0 36px rgba(245,184,46,.85)}}
+.stat{border:1px solid rgba(245,184,46,.22);box-shadow:0 0 22px rgba(245,184,46,.07)}
+.stat b{text-shadow:0 0 16px rgba(245,184,46,.55)}
+.prize{box-shadow:0 0 0 1px rgba(245,184,46,.35),0 0 28px rgba(245,184,46,.12);transition:transform .2s}
+.prize:hover{transform:translateY(-4px)}
+.prize .what{text-shadow:0 0 18px rgba(245,184,46,.55)}
+li{border-left:3px solid var(--gold)}
+.step i{box-shadow:0 0 12px var(--gold)}
+h2::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-radius:3px;background:linear-gradient(90deg,var(--gold),rgba(245,184,46,0));box-shadow:0 0 12px rgba(245,184,46,.7)}
+.kpanel{position:relative;margin-top:-30px;margin-bottom:16px;background:linear-gradient(180deg,rgba(10,15,28,.96),rgba(8,12,22,.96));border-radius:20px;padding:18px 18px 12px;box-shadow:0 0 0 1px rgba(44,255,176,.35),0 0 36px rgba(44,255,176,.16),0 0 80px rgba(255,77,141,.1)}
+.kpanel+.stats{margin-top:0}
+.khead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.kt{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:18px}
+.chip{font-size:11px;letter-spacing:1px;color:var(--gold);border:1px solid rgba(245,184,46,.5);border-radius:999px;padding:3px 10px;text-shadow:0 0 8px rgba(245,184,46,.6)}
+.kr{display:flex;gap:12px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px}
+.kr .up{color:#2CFFB0;text-shadow:0 0 12px rgba(44,255,176,.7)}
+.kr .dn{color:#FF4D8D;text-shadow:0 0 12px rgba(255,77,141,.7)}
+#kline{display:block;width:100%;height:260px}
+.kcap{color:var(--mute);font-size:11px;text-align:right;margin-top:6px}
+@media (prefers-reduced-motion:reduce){.btn{animation:none}.btn:hover,.prize:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -60,6 +83,11 @@ footer{margin-top:64px;border-top:1px solid var(--line);padding:28px 0 40px;colo
 </div>
 </header>
 <main class="wrap">
+<div class="kpanel">
+<div class="khead"><div class="kt"><b>BTC Up or Down</b><span class="chip">5 MIN</span><span class="chip">15 MIN</span></div><div class="kr"><span id="kdir" class="up">UP ▲</span><span id="kchg" class="up">+0.00%</span></div></div>
+<canvas id="kline" aria-hidden="true"></canvas>
+<div class="kcap"><span class="zh">示意动画，非实时行情数据</span><span class="en">Illustrative animation, not live market data</span></div>
+</div>
 <div class="stats"><div class="stat"><b>50</b><span><span class="zh">入选预测玩家</span><span class="en">Selected players</span></span></div><div class="stat"><b>10U</b><span><span class="zh">参赛本金（首日自行充值）</span><span class="en">Entry capital (self-deposited on day 1)</span></span></div><div class="stat"><b>3</b><span><span class="zh">比赛天数</span><span class="en">Days of competition</span></span></div><div class="stat"><b>2</b><span><span class="zh">大奖 PS5 与 GTA VI</span><span class="en">Grand prizes: PS5 and GTA VI</span></span></div></div>
 
 <section><h2><span class="zh">活动规则</span><span class="en">How it works</span></h2>
@@ -120,6 +148,41 @@ a.addEventListener('play',ui);a.addEventListener('pause',ui);
 a.addEventListener('error',function(){m.style.display='none';unbind()});
 evs.forEach(function(e){document.addEventListener(e,kick,true)});
 tryPlay();
+})();
+</script>
+<script>
+(function(){
+var cv=document.getElementById('kline');if(!cv||!cv.getContext)return;
+var ctx=cv.getContext('2d'),dpr=Math.min(window.devicePixelRatio||1,2),W=0,H=0;
+var UP='#2CFFB0',DN='#FF4D8D',GOLD='#F5B82E',STEP=18,BW=10;
+var candles=[],off=0,drift=0,raf=0,tick=0;
+var dirEl=document.getElementById('kdir'),chgEl=document.getElementById('kchg');
+var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function next(o){var v=1.1,d=(Math.random()-.5)*v*2+drift,c=o+d;drift=drift*.85+(Math.random()-.5)*.35;return{o:o,c:c,h:Math.max(o,c)+Math.random()*v*.9,l:Math.min(o,c)-Math.random()*v*.9}}
+function seed(){candles=[];var p=100,n=Math.ceil(W/STEP)+3;for(var i=0;i<n;i++){var c=next(p);candles.push(c);p=c.c}}
+function resize(){var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);seed();draw()}
+function draw(){
+ctx.clearRect(0,0,W,H);ctx.shadowBlur=0;
+var lo=1e9,hi=-1e9;candles.forEach(function(c){if(c.l<lo)lo=c.l;if(c.h>hi)hi=c.h});
+var pad=(hi-lo)*.12||1;lo-=pad;hi+=pad;
+function Y(p){return H-(p-lo)/(hi-lo)*H}
+ctx.lineWidth=1;ctx.strokeStyle='rgba(120,140,200,.14)';
+for(var g=1;g<5;g++){var gy=Math.round(H*g/5)+.5;ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke()}
+candles.forEach(function(c,i){var x=i*STEP-off+BW/2,up=c.c>=c.o,col=up?UP:DN;
+ctx.shadowColor=col;ctx.shadowBlur=14;ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=1.5;
+ctx.beginPath();ctx.moveTo(x,Y(c.h));ctx.lineTo(x,Y(c.l));ctx.stroke();
+var t=Y(Math.max(c.o,c.c)),b=Y(Math.min(c.o,c.c));ctx.fillRect(x-BW/2,t,BW,Math.max(2,b-t))});
+ctx.shadowColor=GOLD;ctx.shadowBlur=16;ctx.strokeStyle=GOLD;ctx.lineWidth=2;ctx.beginPath();
+candles.forEach(function(c,i){var s=0,n=0;for(var j=Math.max(0,i-5);j<=i;j++){s+=candles[j].c;n++}var x=i*STEP-off+BW/2,y=Y(s/n);if(i){ctx.lineTo(x,y)}else{ctx.moveTo(x,y)}});ctx.stroke();ctx.shadowBlur=0;
+}
+function ticker(){var vis=candles.filter(function(c,i){return i*STEP-off<W-10});var live=vis[vis.length-1],first=candles[0];if(!live||!first)return;
+var pct=(live.c/first.o-1)*100,up=pct>=0;dirEl.textContent=up?'UP \u25b2':'DOWN \u25bc';dirEl.className=up?'up':'dn';chgEl.textContent=(up?'+':'')+pct.toFixed(2)+'%';chgEl.className=up?'up':'dn'}
+function frame(){off+=.35;if(off>=STEP){off-=STEP;candles.shift();candles.push(next(candles[candles.length-1].c))}draw();if(++tick%15===0)ticker();raf=requestAnimationFrame(frame)}
+function start(){if(!raf&&!still)raf=requestAnimationFrame(frame)}
+function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
+resize();ticker();
+window.addEventListener('resize',function(){resize();ticker()});
+if('IntersectionObserver' in window){new IntersectionObserver(function(es){es[0].isIntersecting?start():stop()}).observe(cv)}else{start()}
 })();
 </script>
 </body>
