@@ -71,6 +71,11 @@ h2::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-r
 .kcap{color:var(--mute);font-size:11px;text-align:right;margin-top:6px}
 @media (prefers-reduced-motion:reduce){.btn{animation:none}.btn:hover,.prize:hover{transform:none}}
 @media (max-width:760px){.hero{min-height:880px;background-size:100% 100%,170% auto;background-position:0 0,40% 0}.hero-body{padding-top:330px}.hero{isolation:isolate}.hero::after{content:"";position:absolute;left:0;right:0;top:380px;height:130px;z-index:-1;background:linear-gradient(to bottom,rgba(11,15,26,0),#0B0F1A);pointer-events:none}}
+li.warn{border-left-color:#FF4D8D;background:linear-gradient(90deg,rgba(255,77,141,.16),var(--panel) 75%);box-shadow:0 0 20px rgba(255,77,141,.12)}
+li.warn>span{color:#FF86B3;font-weight:700;font-size:16.5px;text-shadow:0 0 14px rgba(255,77,141,.5)}
+li.warn b{color:#fff;text-shadow:none}
+p.wp{border:1px solid var(--line);border-left:3px solid #FF4D8D;border-radius:14px;padding:16px 20px;background:linear-gradient(90deg,rgba(255,77,141,.16),var(--panel) 75%);box-shadow:0 0 20px rgba(255,77,141,.12)}
+p.wp>span{color:#FF86B3;font-weight:700;font-size:16.5px;text-shadow:0 0 14px rgba(255,77,141,.5)}
 </style>
 </head>
 <body>
@@ -79,7 +84,7 @@ h2::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-r
 <div class="wrap hero-body">
 <div class="kicker">FORESO PROPHET CHALLENGE</div>
 <h1><span class="zh">Foreso 预言家<em>挑战赛</em></span><span class="en">Foreso Prophet <em>Challenge</em></span></h1>
-<p class="lead"><span class="zh">你只需专注预测，冲上排行榜，赢取 PS5 或 GTA VI。</span><span class="en">Deposit 10U on day one and you’re in. You make the predictions, climb the leaderboard and win a PS5 or GTA VI.</span></p>
+<p class="lead"><span class="zh">你只需专注预测，冲上排行榜，赢取 PS5 或 GTA VI。</span><span class="en">You make the predictions, climb the leaderboard and win a PS5 or GTA VI.</span></p>
 <a class="btn" href="https://www.foreso.com" target="_blank" rel="noopener noreferrer"><span class="zh">立即加入</span><span class="en">Join now</span></a>
 </div>
 </header>
@@ -89,27 +94,26 @@ h2::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-r
 <canvas id="kline" aria-hidden="true"></canvas>
 <div class="kcap"><span class="zh">示意动画，非实时行情数据</span><span class="en">Illustrative animation, not live market data</span></div>
 </div>
-<div class="stats"><div class="stat"><b>10U</b><span><span class="zh">参赛本金（赛前自行充值）</span><span class="en">Entry capital (self-deposited on day 1)</span></span></div><div class="stat"><b>3</b><span><span class="zh">比赛天数</span><span class="en">Days of competition</span></span></div><div class="stat"><b>2</b><span><span class="zh">大奖 PS5 与 GTA VI</span><span class="en">Grand prizes: PS5 and GTA VI</span></span></div></div>
+<div class="stats"><div class="stat"><b>10U</b><span><span class="zh">参赛本金（赛前自行充值）</span><span class="en">Entry capital (self-deposited before the contest)</span></span></div><div class="stat"><b>3</b><span><span class="zh">比赛天数</span><span class="en">Days of competition</span></span></div><div class="stat"><b>2</b><span><span class="zh">大奖 PS5 与 GTA VI</span><span class="en">Grand prizes: PS5 and GTA VI</span></span></div></div>
 
 <section><h2><span class="zh">活动规则</span><span class="en">How it works</span></h2>
-<p><span class="zh">赛前自行充值 10U 参与比赛，比赛期间不得充值和提币，确保公平竞争。</span><span class="en">On day one you deposit 10U yourself to enter, and everyone starts with the same capital, so the contest stays fair.</span></p>
+<p class="wp"><span class="zh">赛前确保余额为 10U，比赛期间不得充值和提币，确保公平竞争。</span><span class="en">Make sure your balance is 10U before the contest starts, with no deposits or withdrawals during the contest, so the contest stays fair.</span></p>
 <p><span class="zh">在 3 天里，你将自主决策：在指定的 BTC Up or Down - 5 Minutes 与 BTC Up or Down - 15 Minutes 市场中设定仓位大小，并决定获利了结还是止损离场。为了留在比赛中，你需要：</span><span class="en">Over 3 days you make the calls: size your positions in the designated BTC Up or Down - 5 Minutes and BTC Up or Down - 15 Minutes markets, and decide when to take profit or cut losses. To stay in the race:</span></p>
 <ul>
 <li><span class="zh"><b>每天完成至少一笔交易：</b>仅限 BTC Up or Down - 5 Minutes 与 BTC Up or Down - 15 Minutes 市场，买入或卖出份额均可。</span><span class="en"><b>Make at least one trade a day:</b> buy or sell shares in the BTC Up or Down - 5 Minutes and BTC Up or Down - 15 Minutes markets.</span></li>
 <li><span class="zh"><b>每日交易额至少 9U：</b>每天累计交易额需达到 9U 及以上。</span><span class="en"><b>Trade at least 9U a day:</b> your total daily trading volume must reach 9U or more.</span></li>
-<li><span class="zh"><b>至少分享一次你的成果：</b>发布持仓或盈亏截图，并在 X 上标记 Foreso 官方账号。</span><span class="en"><b>Share your results at least once:</b> post your positions or PnL screenshots on X and tag Foreso’s official account.</span></li>
-<li><span class="zh"><b>务必在账号设置里绑定X账号。</b></span><span class="en"><b>Be sure to log in with X.</b></span></li>
+<li><span class="zh"><b>至少分享一次你的成果：</b>在 X 上发布盈亏排名，并标记 Foreso 官方账号。</span><span class="en"><b>Share your results at least once:</b> post your PnL ranking on X and tag Foreso’s official account.</span></li>
+<li class="warn"><span class="zh">比赛期间充入或提出余额自动丧失比赛资格。</span><span class="en">During the contest, depositing or withdrawing funds automatically disqualifies you.</span></li>
 </ul></section>
 
 <section><h2><span class="zh">预测者奖励</span><span class="en">Prizes</span></h2><div class="prizes"><div class="prize"><div class="rank"><span class="zh">第 1 名</span><span class="en">1st place</span></div><div class="what">PS5 + GTA VI</div></div><div class="prize"><div class="rank"><span class="zh">第 2–5 名</span><span class="en">2nd–5th place</span></div><div class="what">GTA VI</div></div></div></section>
 
-<section><h2><span class="zh">活动时间线</span><span class="en">Timeline</span></h2><div class="step"><i></i><div><b><span class="zh">赛事周期</span><span class="en">Contest period</span></b><p><span class="zh">共计 3 天，具体时间待公布。合格者首日自行充值 10U 参赛，争夺排行榜排名。</span><span class="en">3 days in total; exact dates to be announced. Qualified players deposit 10U on day one and compete for leaderboard rankings.</span></p></div></div><div class="step"><i></i><div><b><span class="zh">结算与颁奖</span><span class="en">Settlement & prizes</span></b><p><span class="zh">比赛结束后进行最终快照并公布排名，短暂申诉期后发放奖品。</span><span class="en">A final snapshot is taken and rankings published; prizes go out after a short appeal period.</span></p></div></div></section>
+<section><h2><span class="zh">活动时间线</span><span class="en">Timeline</span></h2><div class="step"><i></i><div><b><span class="zh">赛事周期</span><span class="en">Contest period</span></b><p><span class="zh">共计 3 天，具体时间待公布。</span><span class="en">3 days in total; exact dates to be announced.</span></p></div></div><div class="step"><i></i><div><b><span class="zh">结算与颁奖</span><span class="en">Settlement & prizes</span></b><p><span class="zh">比赛结束后进行最终快照并公布排名，短暂申诉期后发放奖品。</span><span class="en">A final snapshot is taken and rankings published; prizes go out after a short appeal period.</span></p></div></div></section>
 
 <section><h2><span class="zh">报名说明</span><span class="en">How to register</span></h2>
 <ul>
 <li><span class="zh"><b>报名截止：</b>待公布。</span><span class="en"><b>Registration deadline:</b> To be announced.</span></li>
-<li><span class="zh"><b>报名方式：</b>使用 X 登录，并确保账户余额刚好为 10U。</span><span class="en"><b>How to register:</b> log in with X and make sure your account balance is exactly 10U.</span></li>
-<li><span class="zh"><b>比赛期间：</b>不可以充入或提出余额。</span><span class="en"><b>During the contest:</b> no deposits or withdrawals are allowed.</span></li>
+<li class="warn"><span class="zh"><b>报名方式：</b>务必在账号设置里绑定 X 账号，确保余额刚好 10U。</span><span class="en"><b>How to register:</b> be sure to link your X account in your account settings and make sure your balance is exactly 10U.</span></li>
 <li><span class="zh"><b>活动群：</b>加入<a href="https://t.me/+63wdlGjgWI85MTk9" target="_blank" rel="noopener noreferrer" style="color:#F5B82E">活动 Telegram 群</a>，及时获取活动信息。</span><span class="en"><b>Community:</b> join the <a href="https://t.me/+63wdlGjgWI85MTk9" target="_blank" rel="noopener noreferrer" style="color:#F5B82E">campaign Telegram group</a> to get the latest updates.</span></li>
 </ul></section>
 
@@ -117,7 +121,7 @@ h2::after{content:"";display:block;width:56px;height:3px;margin-top:8px;border-r
 <p><span class="zh">如果参赛人数过少，比赛将延期开赛，新的开赛时间将另行公布。</span><span class="en">If too few players take part, the contest start will be postponed and the new start date will be announced separately.</span></p></section>
 
 <section><h2><span class="zh">复活机制</span><span class="en">Revival</span></h2>
-<p><span class="zh">第二天和第三天各有一次复活机会：当前账户余额低于 1U 时，可申请恢复至 10U 余额继续参赛。</span><span class="en">Players get one revival on day 2 and one on day 3: if your current balance is below 1U, you can apply to have it restored to 10U and keep competing.</span></p></section>
+<p class="wp"><span class="zh">第二天和第三天各有一次复活机会：当前账户余额低于 1U 时，可申请恢复至 10U 余额继续参赛。</span><span class="en">Players get one revival on day 2 and one on day 3: if your current balance is below 1U, you can apply to have it restored to 10U and keep competing.</span></p></section>
 
 <section><h2><span class="zh">限制规则</span><span class="en">Rules & disqualification</span></h2>
 <p><span class="zh">发现以下任何行为，违规者将被立即取消资格：</span><span class="en">Any of the following leads to immediate disqualification:</span></p>
